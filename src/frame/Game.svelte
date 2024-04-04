@@ -21,6 +21,7 @@
 		}
 </style>
 
+
 <div class="center frame">
 	<Food {foodX} {foodY}/>
 
