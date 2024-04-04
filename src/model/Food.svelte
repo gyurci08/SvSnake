@@ -11,7 +11,8 @@
         position: absolute;
         left: 0px;
         top: 0px;
-        background-color: #bbb;
+        background-color: red;
+        border: 1px solid black;
         border-radius: 50%;
         z-index: 1;
     }

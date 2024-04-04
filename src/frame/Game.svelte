@@ -146,7 +146,7 @@
 			}
 
 			if (isGameOver()){
-				alert("Game over");
+				alert("Game Over!");
 				resetGame();
 			}
 
@@ -167,7 +167,9 @@
         height: 500px;
 				position: relative;
 				z-index: 0;
-		}
+        background-color: darkgreen;
+
+    }
 </style>
 
 

@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&display=swap" rel="stylesheet">
+
 <script lang="ts">
 	import Game from '../frame/Game.svelte';
 
@@ -5,22 +7,19 @@
 </script>
 
 <style>
-    .center{
-        margin: auto;
-        width: 90%;
-        padding: 10px;
-		}
 
 		.tx_center{
 				text-align: center;
+				font-family: "Codystar";
 		}
 </style>
 
 
 
 
-<div class="center">
+<div class="">
 	<h1 class="tx_center">Snake</h1>
-	<Game bind:score></Game>
 	<h2 class="tx_center">Score: {score}</h2>
+	<Game bind:score></Game>
+
 </div>
