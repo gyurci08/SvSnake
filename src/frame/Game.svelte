@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Food from '../model/Food.svelte';
 	import Snake from '../model/Snake.svelte';
-
+	import { onMount } from 'svelte'
 
 	let foodX=0;
 	let foodY=0;
@@ -146,8 +146,8 @@
 			}
 
 			if (isGameOver()){
-				alert("Game Over!");
 				resetGame();
+				//alert("Game Over!")	;		// Window undefined error;  async?
 			}
 
 	},200)
@@ -178,4 +178,4 @@
 	<Snake {snakeBodies} {direction}/>
 </div>
 
-<svelte:window on:keydown={onKeyPress} on:load={resetGame}/>
+<svelte:window on:keydown={onKeyPress}  on:load={resetGame} />
