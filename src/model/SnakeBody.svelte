@@ -14,8 +14,8 @@
 			position: absolute;
 			width: 50px;
 			height: 50px;
-			top: 0px;
-			left:0px;
+			top: 0;
+			left:0;
       background-color: green;
       z-index: 1;
 	}

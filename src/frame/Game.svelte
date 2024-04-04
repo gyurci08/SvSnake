@@ -2,13 +2,12 @@
 	import Food from '../model/Food.svelte';
 	import Snake from '../model/Snake.svelte';
 
-	export let score = 0;
 
-	let foodX=100;
-	let foodY=200;
+	let foodX=0;
+	let foodY=0;
 
-	let mapWidth = 500;
-	let mapHeight = 500;
+	let mapWidth = 530;
+	let mapHeight = 530;
 
 	let direction: string = "right"
 
@@ -30,7 +29,8 @@
 
 	let snakeBodies = structuredClone(snakeBodies_default);
 
-
+	export let score = 0;
+	$: score = 	snakeBodies.length - 3;
 
 
 	function isCollide(snake, food){
@@ -46,7 +46,7 @@
 		foodX=Math.floor(Math.random()*10) * 50;
 		foodY=Math.floor(Math.random()*10) * 50;
 
-		score += 1;
+
 	}
 
 
@@ -171,7 +171,7 @@
 </style>
 
 
-<div class="center frame">
+<div style="width: {mapWidth}px; height: {mapHeight}px;" class="center frame">
 	<Food {foodX} {foodY}/>
 	<Snake {snakeBodies} {direction}/>
 </div>

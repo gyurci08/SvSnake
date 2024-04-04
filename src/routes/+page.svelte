@@ -8,7 +8,6 @@
     .center{
         margin: auto;
         width: 90%;
-        border: 3px solid black;
         padding: 10px;
 		}
 
