@@ -13,6 +13,7 @@
         top: 0px;
         background-color: #bbb;
         border-radius: 50%;
+        z-index: 1;
     }
 </style>
 
