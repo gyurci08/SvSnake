@@ -2,11 +2,17 @@
 	import Food from '../model/Food.svelte';
 	import Snake from '../model/Snake.svelte';
 
+	export let score = 0;
 
 	let foodX=100;
 	let foodY=200;
 
-	let snakeBodies=[
+	let mapWidth = 500;
+	let mapHeight = 500;
+
+	let direction: string = "right"
+
+	let snakeBodies_default=[
 		{
 			left: 100,
 			top: 0
@@ -21,7 +27,29 @@
 		}
 	]
 
-	 let direction: string = "right"
+
+	let snakeBodies = structuredClone(snakeBodies_default);
+
+
+
+
+	function isCollide(snake, food){
+			return !(
+				snake.top	 < food.top  ||
+				snake.top  >	food.top ||
+				snake.left < food.left ||
+				snake.left > food.left
+			)
+	}
+
+	function moveFood(){
+		foodX=Math.floor(Math.random()*10) * 50;
+		foodY=Math.floor(Math.random()*10) * 50;
+
+		score += 1;
+	}
+
+
 
 
 	function onKeyPress(e: KeyboardEvent){
@@ -50,8 +78,79 @@
 				}
 	}
 
+	function isSnakeCollision(){
+		const snakeBodiesNoHead = snakeBodies.slice(1);
+
+		const snakeCollisions = snakeBodiesNoHead.filter(sb => isCollide(sb, snakeBodies[0]))
+
+		if (snakeCollisions.length > 0)
+			return true;
+
+		return false;
+	}
 
 
+	function isEndOfMap(){
+		const {top, left} = snakeBodies[0];
+		if(
+			top >= mapHeight ||
+			top < 0 				 ||
+			left >= mapWidth ||
+			left < 0
+		){
+			return true
+		}
+		return false
+	}
+
+	function isGameOver(){
+		if (isSnakeCollision() || isEndOfMap()){
+			return true;
+		}
+		return false;
+	}
+
+
+	function resetGame(){
+		moveFood();
+		direction="right";
+		score = 0;
+		snakeBodies = structuredClone(snakeBodies_default);
+	}
+
+
+
+
+	setInterval(() => {											// Tick interval set to 200, this is the game execution
+			snakeBodies.pop()
+
+			let { left, top } = snakeBodies[0]	// Save the position of the head
+
+			switch (direction)
+			{
+				case "up": {top -= 50; break;}
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				case "down": {top += 50; break;}
+				case "left": {left -= 50; break;}
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				case "right": {left += 50; break;}
+			}
+
+			const newHead = { left, top };
+			snakeBodies = [newHead, ...snakeBodies]
+
+			if (isCollide(newHead, { left:foodX, top:foodY})){
+					//alert("The food eaten.")
+					moveFood();
+					snakeBodies = [...snakeBodies,snakeBodies[snakeBodies.length-1]]
+			}
+
+			if (isGameOver()){
+				alert("Game over");
+				resetGame();
+			}
+
+	},200)
 
 
 </script>
@@ -77,4 +176,4 @@
 	<Snake {snakeBodies} {direction}/>
 </div>
 
-<svelte:window on:keydown={onKeyPress} />
+<svelte:window on:keydown={onKeyPress} on:load={resetGame}/>

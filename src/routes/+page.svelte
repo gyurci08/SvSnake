@@ -1,8 +1,7 @@
-<script>
+<script lang="ts">
 	import Game from '../frame/Game.svelte';
 
-
-	let score=0;
+	let score: number;
 </script>
 
 <style>
@@ -23,6 +22,6 @@
 
 <div class="center">
 	<h1 class="tx_center">Snake</h1>
-	<Game></Game>
+	<Game bind:score></Game>
 	<h2 class="tx_center">Score: {score}</h2>
 </div>
