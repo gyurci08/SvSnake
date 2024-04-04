@@ -30,7 +30,6 @@
 			if(newDirection){
 				direction = newDirection;
 			}
-
 	}
 
 	function setDirectionFromKey(key: string){
